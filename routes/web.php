@@ -11,7 +11,15 @@ use Illuminate\Support\Facades\Route;
    return 'This is a PUT/PATCH request';
 });*/
 
-Route::view('/', 'welcome');
-Route::view('contacto', 'contact');
-Route::view('blog', 'blog');
-Route::view('nosotros', 'about');
+Route::view('/', 'welcome')->name('home');
+Route::view('contacto', 'contact')->name('contact');
+Route::get('blog', function () {
+    $posts = [
+        ['title' => 'Post 1'],
+        ['title' => 'Post 2'],
+        ['title' => 'Post 3'],
+        ['title' => 'Post 4'],
+    ];
+    return view('blog', compact('posts'));
+})->name('blog');
+Route::view('nosotros', 'about')->name('about');
