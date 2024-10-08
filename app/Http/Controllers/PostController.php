@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-class PostController
+class PostController extends Controller
 {
-    //Si se le llama a la funcion __invoke no hace falta escribir el nombre en las rutas
-    public function __invoke()
+    //Aqui si tiene nombre de funcion ya que vamos a tener más de una
+    public function index()
     {
         $posts = [
             ['title' => 'Post 1'],

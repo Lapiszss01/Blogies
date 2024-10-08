@@ -16,5 +16,5 @@ Route::view('/', 'welcome')->name('home');
 Route::view('contacto', 'contact')->name('contact');
 Route::view('nosotros', 'about')->name('about');
 
-//Al tener un solo métdo el PostController no hay que especificar el nombre del métdo
-Route::get('blog', PostController::class)->name('blog');
+//LLamamos al controlador y entre comillas el nombre de la funcion:
+Route::get('blog', [PostController::class,'index'])->name('blog');
