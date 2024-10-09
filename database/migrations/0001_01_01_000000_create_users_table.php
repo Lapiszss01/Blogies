@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            //Documentacion sobre migraciones en laravel.com Database:Migrations
             $table->id();
             $table->string('name');
+            $table->string('avatar');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

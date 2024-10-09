@@ -12,8 +12,6 @@ class PostController extends Controller
         //La clase DB de Facades nos permite acceder directamente a la db configurada en el .env
         $posts = DB::table('posts')->get();
 
-        //dd($posts);
-
         return view('blog', compact('posts'));
     }
 }
