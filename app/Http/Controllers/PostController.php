@@ -30,6 +30,9 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
+
+        session()->flash('status', 'Post creado');
+
         //Al hacer redirect en vez de pasar directamente la view se vuelve a ejecutar el Postcontroller
         //return redirect()->route('posts.index');
         //Equivalente a lo de arriba

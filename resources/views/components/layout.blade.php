@@ -9,6 +9,16 @@
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 <x-partials.navigation />
+
+@session('status')
+<div>
+    <!-- Es el session del crear post para mostrar el mensaje de post creado,
+     el if es para que haga la comprobacion de que el session'status' está vacio no cree el div para que
+     no quede vacio y ocupe espacio del html-->
+    {{$value}}
+</div>
+@endsession
+
 {{ $slot }}
 @isset($sidebar)
     <div id="sidebar">
