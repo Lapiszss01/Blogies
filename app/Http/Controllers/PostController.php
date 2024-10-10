@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -24,7 +25,14 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(){
-        return 'Post was created';
+    public function store(Request $request){
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+        //Al hacer redirect en vez de pasar directamente la view se vuelve a ejecutar el Postcontroller
+        //return redirect()->route('posts.index');
+        //Equivalente a lo de arriba
+        return to_route('posts.index');
     }
 }
