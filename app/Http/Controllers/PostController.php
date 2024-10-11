@@ -16,16 +16,24 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    public function show(Post $post){
+    public function show(Post $post)
+    {
         //El compact(post) es equivalente a pasarle un parametro post siempre que sea el nombre del modelo
         return view('posts.show', compact('post'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('posts.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
