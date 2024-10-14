@@ -21,6 +21,15 @@
             @enderror
         </label>
         <br>
+        <label>
+            {{__('Author')}} <br>
+            <textarea name="author">{{old('author')}}</textarea>
+            @error('author')
+            <br>
+            <small style="color: red">{{$message}}</small>
+            @enderror
+        </label>
+        <br>
         <button type="submit">{{__('Send')}}</button>
         <br>
     </form>

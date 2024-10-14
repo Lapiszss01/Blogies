@@ -37,6 +37,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->author = $request->input('author');
         $post->save();
 
         session()->flash('status', 'Post creado');
