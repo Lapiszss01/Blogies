@@ -46,4 +46,9 @@ class PostController extends Controller
         //Equivalente a lo de arriba
         return to_route('posts.index');
     }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+    }
 }
