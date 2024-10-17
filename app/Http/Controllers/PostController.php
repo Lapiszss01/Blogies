@@ -2,54 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    //Aqui si tiene nombre de funcion ya que vamos a tener más de una
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
-        //Al ser méodo estático se pueden usar con ::get()
-        $posts = Post::get();
+        $posts = Post::all();
 
         return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)
     {
-        //El compact(post) es equivalente a pasarle un parametro post siempre que sea el nombre del modelo
         return view('posts.show', compact('post'));
     }
 
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', ['post' => new Post()]);
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
+        Post::create($request->validated());
 
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->author = $request->input('author');
-        $post->save();
-
-        session()->flash('status', 'Post creado');
-
-        //Al hacer redirect en vez de pasar directamente la view se vuelve a ejecutar el Postcontroller
-        //return redirect()->route('posts.index');
-        //Equivalente a lo de arriba
-        return to_route('posts.index');
+        return to_route('posts.index')
+            ->with('status', 'Post created successfully');
     }
 
     public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
+    }
+
+    public function update(UpdatePostRequest $request, Post $post)
+    {
+        $post->update($request->validated());
+
+        return to_route('posts.show', $post)
+            ->with('status', 'Post updated successfully');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return to_route('posts.index')
+            ->with('status', 'Post deleted successfully');
     }
 }
