@@ -12,7 +12,7 @@
 <x-partials.navigation />
 
 @session('status')
-<div>
+<div class="bg-green-600 p-4 text-xl text-green-50 dark:bg-green-300 dark:text-green-50">
     <!-- Es el session del crear post para mostrar el mensaje de post creado,
      el if es para que haga la comprobacion de que el session'status' está vacio no cree el div para que
      no quede vacio y ocupe espacio del html-->
