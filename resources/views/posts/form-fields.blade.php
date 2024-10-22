@@ -3,7 +3,6 @@
     <x-text-input id="title" name="title" type="text" value="{{ old('title', $post->title) }}"
     class="block w-full mt-1"
     />
-
     <x-input-error :messages="$errors->get('title')" class="mt-2" />
 </div>
 <br/>
@@ -13,4 +12,8 @@
     class="block mt-2 w-full mt-1"
     />
     <x-input-error :messages="$errors->get('body')" class="mt-2" />
+</div>
+<br/>
+<div>
+    <x-input-date/>
 </div>
