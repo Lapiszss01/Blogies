@@ -16,7 +16,9 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Post::query()->where('published_at', '>=', now())->orderBy('published_at', 'desc')->get();
+
 
         return view('posts.index', compact('posts'));
     }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->text('published_at')->after('author');
+            $table->timestamp('published_at',0)->after('author')->nullable();
         });
     }
 
