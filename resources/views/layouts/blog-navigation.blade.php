@@ -109,6 +109,7 @@
                 >
                     Contact
                 </a>
+
             </div>
         </div>
         <div class="flex">
@@ -234,7 +235,8 @@
                     </button>
                 </div>
             </div>
-            <button
+
+            <!--<button
                 class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
             >
                 <img
@@ -242,7 +244,31 @@
                     src="https://ui-avatars.com/api?name=Jorge+Garcia"
                     alt="Jorge García"
                 />
-            </button>
+            </button>-->
+
+            <x-dropdown align="right" width="48">
+                <x-slot name="trigger">
+                    <button class="ml-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <img
+                            class="h-6 w-6 rounded-full"
+                            src="https://ui-avatars.com/api?name=Jorge+Garcia"
+                            alt="Jorge García"
+                        />
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('login')">
+                        {{ __('Log in') }}
+                    </x-dropdown-link>
+
+                    <x-dropdown-link :href="route('register')">
+                        {{ __('Register') }}
+                    </x-dropdown-link>
+
+                </x-slot>
+            </x-dropdown>
+
         </div>
     </div>
     <div
@@ -273,6 +299,8 @@
         >
             Contact
         </a>
+
+
     </div>
 </header>
 
