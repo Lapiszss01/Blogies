@@ -10,6 +10,7 @@
         </div>--}}
 
         @auth
+            @if(Auth::id() === $post->user_id)
             <div
                 class="flex items-center justify-center space-x-10"
             >
@@ -60,6 +61,7 @@
                     </button>
                 </form>
             </div>
+            @endif
         @endauth
 
         <div class="flex-1 space-y-3 pt-4 md:text-center">

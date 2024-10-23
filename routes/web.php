@@ -11,6 +11,7 @@ Route::resource('blog', PostController::class)
     ->names('posts')
     ->parameters(['blog' => 'post']);
 
+Route::get('myposts', [PostController::class, 'myposts'])->name('myposts');
 Route::view('nosotros', 'about')->name('about');
 
 Route::get('/dashboard', function () {

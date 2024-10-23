@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -21,6 +22,13 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function myposts()
+    {
+        //$posts = Post::all();
+        $posts = Post::query()->where('user_id', '=', Auth::id())->orderBy('publish_date', 'desc')->get();
+        return view('posts.myposts', compact('posts'));
+    }
+
     public function show(Post $post)
     {
         return view('posts.show', compact('post'));
@@ -33,9 +41,10 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-       // dd($request->all());
 
-        Post::create($request->validated());
+       // $request->user_id = Auth::id();
+        //dd($request->user_id);
+        Post::create($request->validated() + ['user_id' => Auth::id()]);
 
         return to_route('posts.index')
             ->with('status', 'Post created successfully');

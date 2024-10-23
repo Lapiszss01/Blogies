@@ -110,6 +110,12 @@
                     Contact
                 </a>
 
+                <a
+                    class="px-3 py-2 {{ request()->routeIs('myposts') ? 'text-sky-500' : 'text-slate-600 transition-colors hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-500' }}"
+                    href="{{ route('myposts') }}"
+                >
+                    Mis Posts
+                </a>
             </div>
         </div>
         <div class="flex">
@@ -249,14 +255,25 @@
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button class="ml-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        @auth
                         <img
                             class="h-6 w-6 rounded-full"
-                            src="https://ui-avatars.com/api?name=Jorge+Garcia"
-                            alt="Jorge García"
+                            src="https://ui-avatars.com/api?name={{Auth::user()->name}}+{{Auth::user()->lastname}}"
+                            alt="{{Auth::user()->name}} {{Auth::user()->lastname}}"
                         />
+                        @endauth
+
+                        @guest
+                                <img
+                                    class="h-6 w-6 rounded-full"
+                                    src="https://ui-avatars.com/api?name=Guest"
+                                    alt="Guest"
+                                />
+                        @endguest
                     </button>
                 </x-slot>
 
+                @guest
                 <x-slot name="content">
                     <x-dropdown-link :href="route('login')">
                         {{ __('Log in') }}
@@ -267,6 +284,27 @@
                     </x-dropdown-link>
 
                 </x-slot>
+                @endguest
+
+                @auth
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                @endauth
+
             </x-dropdown>
 
         </div>
