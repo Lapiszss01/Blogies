@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         //$posts = Post::all();
-        $posts = Post::query()->where('published_at', '<=', now())->orderBy('published_at', 'desc')->get();
+        $posts = Post::query()->where('publish_date', '<=', now())->orderBy('publish_date', 'desc')->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -33,6 +33,8 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+       // dd($request->all());
+
         Post::create($request->validated());
 
         return to_route('posts.index')
